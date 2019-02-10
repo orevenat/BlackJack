@@ -3,25 +3,33 @@ require_relative 'messages'
 require_relative 'deck'
 
 class Game
-
   attr_reader :player, :dealer, :deck
 
   def initialize
-    @deck = Deck.new
-    @dealer = Player.new(:Dealer, 100)
+    @dealer = Player.new('Dealer', 100)
+    player_name = Messages.set_name
+    @player = Player.new(player_name, 100)
   end
 
   def init
-    player = Messages.take_name
-    self.player = Player.new(player, 100)
+    self.deck = Deck.new
     player.add_card(deck.take_card)
     dealer.add_card(deck.take_card)
     player.add_card(deck.take_card)
     dealer.add_card(deck.take_card)
+    player.take_money(10)
+    dealer.take_money(10)
   end
 
   def start
     init
+    puts "Карты #{player.show_cards.map.join(' ')}"
+    puts "Количество очков #{player.points}"
+    puts player.cards
+    puts player.points
+    puts '==='
+    puts dealer.cards
+    puts dealer.points
   end
 
   private
