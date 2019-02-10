@@ -1,9 +1,11 @@
+require_relative 'account'
+
 class Player
   attr_reader :cards, :account, :name, :points
 
-  def initialize(name, account)
+  def initialize(name, money)
     @name = name
-    @account = account
+    @account = Account.new(money)
   end
 
   def add_card(card)
