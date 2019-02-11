@@ -23,7 +23,6 @@ class Messages
     puts "#{PLAYER_NAME} #{player.name}"
     puts "#{CARDS} #{player.show_cards.join(' ')}"
     puts "#{POINTS_QUANTITY} #{player.points}"
-    puts "money: #{player.money}"
     puts ' '
   end
 
