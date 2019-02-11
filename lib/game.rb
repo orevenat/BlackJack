@@ -59,8 +59,6 @@ class Game
 
   def open_cards
     Messages.show_stats(dealer)
-    winner
-
     case winner
     when :tie
       Messages.tie
