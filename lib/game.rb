@@ -23,8 +23,18 @@ class Game
 
   def start
     init
-    puts "Карты #{player.show_cards.map.join(' ')}"
-    puts "Количество очков #{player.points}"
+    Messages.show_stats(player)
+    debug
+  end
+
+  def skip
+
+  end
+
+  def open_cards
+  end
+
+  def debug
     puts player.cards
     puts player.points
     puts '==='
