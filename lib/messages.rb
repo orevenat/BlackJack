@@ -27,8 +27,8 @@ class Messages
   end
 
   def self.actions(actions)
-    actions.each_with_index do |action, index|
-      puts "#{index + 1} #{action}"
+    actions.each_with_index(1) do |action, index|
+      puts "#{index} #{action}"
     end
     action = gets.to_i - 1
     result = actions[action]
