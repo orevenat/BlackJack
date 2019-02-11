@@ -11,6 +11,7 @@ class Messages
   WIN = 'Вы победили'.freeze
   PLAYER_NOMONEY = 'Вы банкрот'.freeze
   DEALER_NOMONEY = 'Диллер банкрот'.freeze
+  CARD_ADDED = 'Карта добавлена'.freeze
 
   def self.set_name
     puts START_MESSAGE
@@ -24,6 +25,20 @@ class Messages
     puts "#{POINTS_QUANTITY} #{player.points}"
     puts "money: #{player.money}"
     puts ' '
+  end
+
+  def self.actions(actions)
+    actions.each_with_index do |action, index|
+      puts "#{index + 1} #{action}"
+    end
+    action = gets.to_i - 1
+    result = actions[action]
+    result || actions(actions)
+  end
+
+  def self.card_added(player)
+    puts "#{CARD_ADDED} #{player.cards.last[:name]}"
+    puts "#{POINTS_QUANTITY} #{player.points}"
   end
 
   def self.play_again?

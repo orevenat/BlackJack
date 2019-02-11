@@ -3,7 +3,7 @@ require_relative 'messages'
 require_relative 'deck'
 
 class Game
-  attr_reader :player, :dealer, :deck
+  attr_reader :player, :dealer, :deck, :actions
 
   def initialize
     @dealer = Player.new('Dealer', 100)
@@ -19,6 +19,7 @@ class Game
 
   def init
     self.deck = Deck.new
+    self.actions = [:take_card, :skip, :open_cards]
     player.clean_cards
     dealer.clean_cards
     add_card(player)
@@ -32,8 +33,24 @@ class Game
   def start
     init
     Messages.show_stats(player)
-    open_cards
+    game
   end
+
+  def game
+    player_step = Messages.actions(actions)
+    actions.delete(player_step)
+    method(player_step).call
+    add_card(dealer) if dealer.points < 17
+    open_cards if dealer.cards == 3 && player.cards == 3
+    game
+  end
+
+  def take_card
+    add_card(player)
+    Messages.card_added(player)
+  end
+
+  def skip; end
 
   def add_card(player)
     player.add_card(deck.take_card)
@@ -79,5 +96,5 @@ class Game
 
   private
 
-  attr_writer :player, :dealer, :deck
+  attr_writer :player, :dealer, :deck, :actions
 end
