@@ -24,6 +24,10 @@ class Player
     self.cards = []
   end
 
+  def money
+    account.money
+  end
+
   def take_money(money)
     account.take_money(money)
   end
