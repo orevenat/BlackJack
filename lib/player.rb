@@ -12,7 +12,7 @@ class Player
 
   def add_card(card)
     cards << card
-    value = card[:value]
+    value = points > 11 && card[:small_value] ? card[:small_value] : card[:value]
     self.points += value
   end
 
