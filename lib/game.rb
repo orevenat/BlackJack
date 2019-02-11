@@ -39,9 +39,6 @@ class Game
     player.add_card(deck.take_card)
   end
 
-  def skip
-  end
-
   def open_cards
     Messages.show_stats(dealer)
     if player.points > 21
@@ -51,12 +48,18 @@ class Game
       Messages.tie
       dealer.put_money(10)
       player.put_money(10)
-    elsif 21 - player.points < 21 - dealer.points
-      Message.you_win
+    elsif dealer.points > 21
+      Messages.you_win
       player.put_money(20)
+    elsif 21 - player.points < 21 - dealer.points
+      Messages.you_win
+      player.put_money(20)
+    else
+      Messages.you_lose
+      dealer.put_money(20)
     end
 
-    no_money? && restart? ? restart : exit
+    # no_money? && Messages.restart? ? restart : exit
 
     Messages.play_again? ? start : exit
   end
@@ -70,18 +73,6 @@ class Game
       return true
     end
     false
-  end
-
-  def restart?
-    Messages.restart?
-  end
-
-  def debug
-    puts player.cards
-    puts player.points
-    puts '==='
-    puts dealer.cards
-    puts dealer.points
   end
 
   private

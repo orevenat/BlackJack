@@ -22,6 +22,7 @@ class Player
 
   def clean_cards
     self.cards = []
+    self.points = 0
   end
 
   def money
