@@ -12,12 +12,12 @@ class Player
 
   def add_card(card)
     cards << card
-    value = points > 11 && card[:small_value] ? card[:small_value] : card[:value]
+    value = points > 11 && card.small_value ? card.small_value : card.value
     self.points += value
   end
 
   def show_cards
-    cards.map { |card| card[:name] }
+    cards.map(&:name)
   end
 
   def clean_cards

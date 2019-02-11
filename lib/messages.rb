@@ -36,7 +36,7 @@ class Messages
   end
 
   def self.card_added(player)
-    puts "#{CARD_ADDED} #{player.cards.last[:name]}"
+    puts "#{CARD_ADDED} #{player.cards.last.name}"
     puts "#{POINTS_QUANTITY} #{player.points}"
   end
 

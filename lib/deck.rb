@@ -8,7 +8,7 @@ class Deck
   attr_reader :cards
 
   def initialize
-    cards = RANKS.zip(VALUES).product(SUITS)
+    cards = RANKS.zip(VALUES).product(SUITS).map(&:flatten)
     @cards = cards.map do |rank, value, suit|
       Card.new(rank, suit, value)
     end
