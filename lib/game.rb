@@ -13,10 +13,10 @@ class Game
 
   def init
     self.deck = Deck.new
-    player.add_card(deck.take_card)
-    dealer.add_card(deck.take_card)
-    player.add_card(deck.take_card)
-    dealer.add_card(deck.take_card)
+    add_card(player)
+    add_card(dealer)
+    add_card(player)
+    add_card(dealer)
     player.take_money(10)
     dealer.take_money(10)
   end
@@ -27,8 +27,11 @@ class Game
     debug
   end
 
-  def skip
+  def add_card(player)
+    player.add_card(deck.take_card)
+  end
 
+  def skip
   end
 
   def open_cards
