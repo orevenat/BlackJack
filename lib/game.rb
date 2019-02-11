@@ -59,22 +59,19 @@ class Game
 
   def open_cards
     Messages.show_stats(dealer)
-    if player.points > 21
-      Messages.you_lose
-      dealer.put_money(20)
-    elsif player.points == dealer.points
+    winner
+
+    case winner
+    when :tie
       Messages.tie
       dealer.put_money(10)
       player.put_money(10)
-    elsif dealer.points > 21
-      Messages.you_win
-      player.put_money(20)
-    elsif 21 - player.points < 21 - dealer.points
-      Messages.you_win
-      player.put_money(20)
-    else
+    when :dealer
       Messages.you_lose
       dealer.put_money(20)
+    when :player
+      Messages.you_win
+      player.put_money(20)
     end
 
     if no_money?
@@ -82,6 +79,23 @@ class Game
     end
 
     Messages.play_again? ? start : exit
+  end
+
+  def winner
+    return :tie if player.points == dealer.points || tie?
+    return :dealer if player.points > 21
+    return :player if dealer.points > 21
+    return :player if player_win?
+
+    :dealer
+  end
+
+  def player_win?
+    21 - player.points < 21 - dealer.points
+  end
+
+  def tie?
+    player.points > 21 && dealer.points > 21
   end
 
   def no_money?
