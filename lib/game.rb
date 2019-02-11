@@ -3,6 +3,7 @@ require_relative 'messages'
 require_relative 'deck'
 
 class Game
+  DEALER_STOP_VALUE = 17
   attr_reader :player, :dealer, :deck, :actions
 
   def initialize
@@ -40,7 +41,7 @@ class Game
     player_step = Messages.actions(actions)
     actions.delete(player_step)
     method(player_step).call
-    add_card(dealer) if dealer.points < 17
+    add_card(dealer) if dealer.points < DEALER_STOP_VALUE
     open_cards if dealer.cards == 3 && player.cards == 3
     game
   end
