@@ -17,7 +17,7 @@ class Player
   end
 
   def show_cards
-    cards.map { |c| c[:name] }
+    cards.map { |card| card[:name] }
   end
 
   def clean_cards
