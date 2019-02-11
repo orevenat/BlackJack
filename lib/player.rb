@@ -20,6 +20,10 @@ class Player
     cards.map { |c| c[:name] }
   end
 
+  def clean_cards
+    self.cards = []
+  end
+
   def take_money(money)
     account.take_money(money)
   end

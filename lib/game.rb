@@ -13,6 +13,8 @@ class Game
 
   def init
     self.deck = Deck.new
+    player.clean_cards
+    dealer.clean_cards
     add_card(player)
     add_card(dealer)
     add_card(player)
@@ -24,7 +26,7 @@ class Game
   def start
     init
     Messages.show_stats(player)
-    debug
+    open_cards
   end
 
   def add_card(player)
@@ -35,6 +37,13 @@ class Game
   end
 
   def open_cards
+    Messages.show_stats(dealer)
+    if player.points > 21
+      Messages.you_lose
+    elsif player.points == dealer.points
+      Messages.tie
+    end
+    Messages.play_again? ? start : exit
   end
 
   def debug
