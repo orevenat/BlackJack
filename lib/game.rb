@@ -59,7 +59,9 @@ class Game
       dealer.put_money(20)
     end
 
-    # no_money? && Messages.restart? ? restart : exit
+    if no_money?
+      Messages.restart? ? restart : exit
+    end
 
     Messages.play_again? ? start : exit
   end
@@ -69,7 +71,7 @@ class Game
       Messages.no_money
       return true
     elsif dealer.money.zero?
-      Messages.delaer_no_money
+      Messages.dealer_no_money
       return true
     end
     false

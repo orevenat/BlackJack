@@ -8,7 +8,7 @@ class Account
   def take_money(value)
     raise 'No money' if money < value
 
-    self.money -= - value
+    self.money -= value
     value
   end
 
