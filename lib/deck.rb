@@ -5,9 +5,9 @@ class Deck
   attr_reader :cards
 
   def initialize
-    cards = Card::RANKS.zip(Card::VALUES).product(Card::SUITS).map(&:flatten)
-    @cards = cards.map do |rank, value, suit|
-      Card.new(rank, suit, value)
+    cards = Card::RANKS.product(Card::SUITS)
+    @cards = cards.map do |rank, suit|
+      Card.new(rank, suit, Card.cost(rank))
     end
   end
 
